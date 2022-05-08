@@ -23,3 +23,8 @@ With the relation between the missing values and the dependent variables is clea
 nan values with somthing meaningful ( not just mean, median or mode ) .
 
 The newer houses have are more costly than the older ones .
+
+There is a relation betwenn discrete features and sales price.
+
+Most of the distribution plotted for continuous value distribution are of log normal and we can convert log normal distribution to 
+a normal distribution by taking log 

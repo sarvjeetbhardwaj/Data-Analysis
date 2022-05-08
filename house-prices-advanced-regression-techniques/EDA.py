@@ -77,3 +77,85 @@ for feature in year_feature:
         #plt.show()
 
 
+#Discrete numerical features
+discrete_num_features = []
+for fea in num_features:
+    if len(dataset[fea].unique()) <= 25:
+        discrete_num_features.append(fea)
+
+#print(len(discrete_num_features))
+#print(dataset[discrete_num_features].head())
+
+#plotting the relation between the discrete variables and Saleprice
+data = dataset.copy()
+for feat in discrete_num_features:
+    data.groupby(feat)['SalePrice'].median().plot.bar()
+    #plt.xlabel(feat)
+    #plt.ylabel('SalePrice')
+    #plt.show()
+
+
+#Continuous variables
+cont_num_features = []
+for feat in num_features:
+    if feat not in discrete_num_features + year_feature:
+        cont_num_features.append(feat)
+
+#print(len(cont_num_features))
+
+#Lets analyse continuos value by creating histograms to understnd distribution
+data = dataset.copy()
+for feature in cont_num_features:
+    sns.histplot(data = data , x= feature , kde = True)
+    #plt.xlabel(feature)
+    #plt.ylabel('Count')
+    #plt.show()
+
+#we will be using logrithmic transformation
+data = dataset.copy()
+for feature in cont_num_features:
+    if 0 in data[feature].unique(): # since we are converting log normal distribution to normal distribution , log of 0 is undefined 
+        pass
+    else:
+        data[feature] = np.log(data[feature])
+        sns.scatterplot(data = data , x = feature , y = 'SalePrice')
+        #plt.xlabel(feature)
+        #plt.ylabel('SalePrice')
+        #plt.title(feature)
+        #plt.show()
+
+
+#detecting outliers
+data = dataset.copy()
+for feature in cont_num_features:
+    if 0 in data[feature].unique():
+        pass
+    else:
+        data[feature] = np.log(data[feature])
+        sns.boxenplot(data = data , x = feature,)
+        #plt.show()
+
+#Categorical variables
+categorical_features = []
+data = dataset.copy()
+for features in data.columns:
+    if data[features].dtypes == 'object':
+        categorical_features.append(features)
+
+#print((categorical_features))
+
+#plotting the raltionship between categorical variables and saleprice
+
+data=dataset.copy()
+for feat in  categorical_features:
+    data.groupby(feat)['SalePrice'].median().plot.bar()
+    plt.xlabel(feat)
+    plt.ylabel('SalePrice')
+    plt.show()
+
+
+
+
+
+
+
