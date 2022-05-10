@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sklearn
+
+################################## EDA STARTS HERE ########################################
+
 
 #pd.pandas.set_options('display.max_columns', None) to be used only in Jypyter notebook
 
@@ -106,7 +110,8 @@ for feat in num_features:
 #Lets analyse continuos value by creating histograms to understnd distribution
 data = dataset.copy()
 for feature in cont_num_features:
-    sns.histplot(data = data , x= feature , kde = True)
+    pass
+    #sns.histplot(data = data , x= feature , kde = True)
     #plt.xlabel(feature)
     #plt.ylabel('Count')
     #plt.show()
@@ -118,7 +123,7 @@ for feature in cont_num_features:
         pass
     else:
         data[feature] = np.log(data[feature])
-        sns.scatterplot(data = data , x = feature , y = 'SalePrice')
+        #sns.scatterplot(data = data , x = feature , y = 'SalePrice')
         #plt.xlabel(feature)
         #plt.ylabel('SalePrice')
         #plt.title(feature)
@@ -132,7 +137,7 @@ for feature in cont_num_features:
         pass
     else:
         data[feature] = np.log(data[feature])
-        sns.boxenplot(data = data , x = feature,)
+        #sns.boxenplot(data = data , x = feature,)
         #plt.show()
 
 #Categorical variables
@@ -151,7 +156,56 @@ for feat in  categorical_features:
     data.groupby(feat)['SalePrice'].median().plot.bar()
     plt.xlabel(feat)
     plt.ylabel('SalePrice')
-    plt.show()
+    #plt.show()
+
+
+################################## EDA ENDS HERE ########################################
+
+################################### Feature engineering starts here ###############################
+
+#Handling  categorical features
+
+data = dataset.copy()
+def replace_cat_features(dataset,categorical_features):
+    dataset[categorical_features] = dataset[categorical_features].fillna('Missing')
+    return dataset
+
+def replace_cat_features_with_mode(dataset,categorical_features):
+    dataset[categorical_features] = dataset[categorical_features].fillna(dataset[categorical_features].mode())
+    return dataset
+
+#print(replace_cat_features(data,categorical_features))
+#print(replace_cat_features_with_mode(data,categorical_features))
+
+num_features_with_nan = []
+for fe in num_features:
+    if data[fe].isnull().sum() >=1:
+        num_features_with_nan.append(fe)
+
+for fe in num_features_with_nan:
+    sns.boxplot(data = data, x=fe )
+    #plt.show()
+
+# Since there are outliers , we will replace the values by median
+for fe in num_features_with_nan:
+    median_value = dataset[fe].median()
+    #capturing nan values in for each feature in num_features_with_nan
+    dataset[fe + '_nan'] = np.where(dataset[fe].isnull(),1,0)
+    dataset[fe].fillna(median_value,inplace = True)
+    #print(dataset[fe].isnull().sum())
+
+#temporal variables
+for fer in ['YearBuilt','YearRemodAdd','GarageYrBlt']:
+    dataset[fer + '_age_of_house'] = dataset['YrSold'] - dataset[fer]
+
+
+print(dataset)
+
+
+
+
+
+
 
 
 
