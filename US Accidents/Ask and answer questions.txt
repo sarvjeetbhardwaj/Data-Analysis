@@ -1,0 +1,9 @@
+1. Are there more accidents in warmer or colder areas ?
+2. Which 5 staes have the hightest number of accidents ?? How about per capita ?
+3. Does New York shown up in the data , if yes , why is the count lower if this the most populated city ?
+4. Among the top 100 cities in number of accidents , which states do thet belong to most frequestly ?
+5. What time of the day are the most accients most request in ?
+6. Which days of the week have the most accidents ?
+7. Which month have most accidents ??
+8. What is the trend of accidents over a given period of time ??
+9  Is the distribution of accidents by hour the same of weends as on weekdays ??

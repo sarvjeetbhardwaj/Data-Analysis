@@ -1,0 +1,10 @@
+Insights from the data ::
+
+1. Less than 5% of the cities have more than 1000 yearly accidents
+2. 1000 cities have reported just one accident
+3. The number of accidents per city decreases exponetially
+4. Most accidents occur between 3-6 pm
+5. Next highest percentage is 6-10 am
+6. Accidents are higher on weekdays.
+7. Accidents are higher in the December .
+8. Data is missing for 2020
