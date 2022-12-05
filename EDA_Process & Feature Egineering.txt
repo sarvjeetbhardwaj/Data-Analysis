@@ -12,24 +12,3 @@ In  Exploratory Data Analysis we will analyse to find the below stuff
 8. Correlation
 
 
-Observations ::
-
-In order to fill missing values ,we need to check the relationship between missing independent and dependent variable.
-
-With the relation between the missing values and the dependent variables is clearly visible. So we need to replace these
-nan values with somthing meaningful ( not just mean, median or mode ) .
-
-The newer houses have are more costly than the older ones .
-
-There is a relation betwenn discrete features and sales price.
-
-Most of the distribution plotted for continuous value distribution are of log normal and we can convert log normal distribution to 
-a normal distribution by taking log 
-
-Feature engineerimg process ::
-
-1.Handling Missing Data
-2.Temporal Variables
-3.Handle Categorical Variables : Remove Rare labels 
-4.Standardize the values of the variable to the same range 
-
